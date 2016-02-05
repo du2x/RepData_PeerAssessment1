@@ -95,8 +95,8 @@ spi[which.max(spi$steps), ]
 ```r
 nas <- is.na(data$steps)
 num_nas <- sum(nas)
-
 ```
+
 *Displaying the number of missing values*
 
 
@@ -123,9 +123,10 @@ plot(steps ~ interval, data = spi_no_nas, type = "l", xlab = "interval",
 
 ## Are there differences in activity patterns between weekdays and weekends?
 
+```r
 data_no_nas$wdt <- as.factor(ifelse(weekdays(data_no_nas$date) 
     %in% c("sábado", "domingo"), "weekend", "weekday"))
 data_no_nas_weekware <- aggregate(data_no_nas$steps, data_no_nas[c(3,4)], mean)
-
 xyplot(x ~ interval | wdt, data = data_no_nas_weekware, layout = c(1, 2), 
     type = "l", xlab = "Interval",  ylab = "Number of steps")
+```
