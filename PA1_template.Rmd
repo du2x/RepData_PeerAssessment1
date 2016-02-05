@@ -36,8 +36,9 @@ data$date <- as.Date(data$date, "%Y-%m-%d")
 by_date <- group_by(data, date)
 steps_per_day<-summarize(by_date, sum(steps))
 names(steps_per_day)<-c('date', 'steps')
-hist(steps_per_day$steps)
+hist(steps_per_day$steps, xlab="steps", main="Averaged steps per day")
 ```
+![plot of chunk steps_per_day](figure/steps_per_day.png) 
 
 
   *Computing the mean of steps per day*
@@ -78,6 +79,7 @@ plot(steps ~ interval, data = spi, type = "l", xlab = "interval",
      ylab = "Average number of steps", main = "Average daily activity pattern", 
      col = "blue")
 ```
+![plot of chunk steps_per_interval](figure/steps_per_interval.png) 
 
   *Displaying the 5 min interval with maximum average number of steps*
 
@@ -110,7 +112,7 @@ num_nas <- sum(nas)
 data_no_nas <- data
 data_no_nas[nas, 'steps'] <- mean_interval
 ```
-*New Histogram of the total number of steps taken each day*
+*New Histogram of the total number of steps taken each day with no NAs*
 
 ```r
 by_interval_no_nas = group_by(data_no_nas, interval)
@@ -121,12 +123,16 @@ plot(steps ~ interval, data = spi_no_nas, type = "l", xlab = "interval",
     col = "blue")
 ```
 
+![plot of chunk steps_per_interval_no_nas](figure/steps_per_interval_no_nas.png) 
+
+
 ## Are there differences in activity patterns between weekdays and weekends?
 
 ```r
 data_no_nas$wdt <- as.factor(ifelse(weekdays(data_no_nas$date) 
-    %in% c("sÃ¡bado", "domingo"), "weekend", "weekday"))
+    %in% c("sábado", "domingo"), "weekend", "weekday"))
 data_no_nas_weekware <- aggregate(data_no_nas$steps, data_no_nas[c(3,4)], mean)
 xyplot(x ~ interval | wdt, data = data_no_nas_weekware, layout = c(1, 2), 
     type = "l", xlab = "Interval",  ylab = "Number of steps")
 ```
+![plot of chunk steps_per_interval_weekware](figure/steps_per_interval_weekware.png) 
