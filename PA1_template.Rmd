@@ -28,7 +28,6 @@ data$date <- as.Date(data$date, "%Y-%m-%d")
 ## What is mean total number of steps taken per day?
   *Creating a histogram for total number of Steps taken per day*
   
-     *Removing the data entries with "NA"
      *Aggregating the data to find sum of steps per day
      *Plotting the Total steps per day
 
@@ -130,7 +129,7 @@ plot(steps ~ interval, data = spi_no_nas, type = "l", xlab = "interval",
 
 ```r
 data_no_nas$wdt <- as.factor(ifelse(weekdays(data_no_nas$date) 
-    %in% c("sábado", "domingo"), "weekend", "weekday"))
+    %in% c("sÃ¡bado", "domingo"), "weekend", "weekday"))
 data_no_nas_weekware <- aggregate(data_no_nas$steps, data_no_nas[c(3,4)], mean)
 xyplot(x ~ interval | wdt, data = data_no_nas_weekware, layout = c(1, 2), 
     type = "l", xlab = "Interval",  ylab = "Number of steps")
